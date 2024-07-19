@@ -16,4 +16,45 @@
       </head>
       <body><div id="jaas-container" /></body>
     </html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jitsi Meet</title>
+</head>
+<body>
+  <div id="access-control">
+    <label for="password">Enter Password:</label>
+    <input type="password" id="password">
+    <button onclick="authenticate()">Submit</button>
+  </div>
+  <div id="meet" style="display: none;"></div>
+  <script src="https://meet.jit.si/external_api.js"></script>
+  <script>
+    const predefinedPassword = "jetVALIYORA"; // Replace with your predefined password
+
+    function authenticate() {
+      const inputPassword = document.getElementById("password").value;
+      if (inputPassword === predefinedPassword) {
+        document.getElementById("access-control").style.display = "none";
+        document.getElementById("meet").style.display = "block";
+        loadJitsi();
+      } else {
+        alert("Incorrect password. Access denied.");
+      }
+    }
+
+    function loadJitsi() {
+      const domain = "meet.jit.si";
+      const options = {
+        roomName: "YourMeetingRoom",
+        width: "100%",
+        height: 700,
+        parentNode: document.querySelector('#meet')
+      };
+      const api = new JitsiMeetExternalAPI(domain, options);
+    }
+  </script>
+</body>
+</html>
+
   
